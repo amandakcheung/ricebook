@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ricebook</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>Create a Recipe Here</h1>
+    </header>
+
+    <a href="index.html">Back to Home</a>
+
+    <section id="recipe-div">
+        <label for="name"> Author Name:</label>
+        <input type="text" id="name" name="name" placeholder="amanda cheung"><br><br>
+
+        <label for="title">Recipe Title:</label>
+        <input type="text" id="title" name="title" placeholder="egg and tomato rice"><br><br>
+
+        <label for="background">Background:</label><br>
+        <textarea id="background" name="background" rows="4" cols="50" placeholder="tell a story about the dish"></textarea><br><br>
+
+        <label for="tag">Tags:</label><br>
+        <textarea id="tag" name="tag" rows="2" cols="50" placeholder="list tags (ex.chinese, snack, etc) separated by commas"></textarea><br><br>
+
+        <div id="ingredients">Ingredients: <br>
+            <div id="ingredient">
+                <input type="amount" id="amount" step="0.01" placeholder="0.00" /><select id="measurement">
+                    <option value="oz">oz</option>
+                    <option value="cup">cup</option>
+                    <option value="tsp">tsp</option>
+                    <option value="tbsp">tsbp</option>
+                    <option value="gram">gram</option>
+                    <option value="floz">floz</option>
+                    <option value="n/a">n/a</option>
+                </select>
+                <input type="text" id="item" name="item" placeholder="eggs">
+            </div>
+        </div>
+        <button id="add-ingredient">Add Ingredient</button> <br> <br>
+        <label for="Notes">Cooking Notes:</label><br>
+        <textarea id="notes" name="notes" rows="4" cols="50" placeholder="any notes about preparation"></textarea><br>
+
+        <button id="submit-post"> Post</button>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Your Website. All rights reserved.</p>
+    </footer>
+    <script type="module" src="./App.js"></script>
+</body>
+
+</html>

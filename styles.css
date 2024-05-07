@@ -41,3 +41,39 @@ footer {
     bottom: 0;
     width: 100%;
 }
+
+#newPost {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    background-color: #007bff;
+    transition: background-color 0.3s ease;
+    vertical-align: center;
+    align-items: center;
+}
+
+#button{
+    text-align: center;
+}
+
+#all-recipes{
+    /* text-align: center; */
+    vertical-align: center;
+}
+
+#post{
+        border: 3px solid #ccc; /* Border style */
+        padding: 10px; /* Padding around the content */
+        display: inline-block; /* Display as an inline-block element */
+        width: 300px;
+        align-items: center;
+        background-color: #80B1F0;
+        margin: 0 auto; /* Center the box horizontally */
+}
