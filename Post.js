@@ -3,8 +3,10 @@
 //import { firebaseConfig } from './firebaseConfig.js';
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
 import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
-import { getFirestore, addDoc, collection, doc, setDoc,
-    query, where, getDocs, orderBy, or} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js";
+import {
+    getFirestore, addDoc, collection, doc, setDoc,
+    query, where, getDocs, orderBy, or
+} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js";
 
 
 // Initialize Firebase
@@ -63,7 +65,7 @@ export function createPost() {
     const notes = document.getElementById('notes').value
     const fullIngredient = document.querySelectorAll('#ingredient')
     const ingredientArray = []
-    fullIngredient.forEach(function(ingredient){
+    fullIngredient.forEach(function (ingredient) {
         var fullString = ''
         fullString += ingredient.querySelector('#amount').value;
         fullString += " "
@@ -79,22 +81,26 @@ export function createPost() {
     console.log(notes)
     console.log(ingredientArray)
     addToFirebase(nameValue, titleValue, backgroundValue, ingredientArray, notes, tag)
-    window.location.href = "https://cs.wellesley.edu/~ac119/test2/ricebook/feed.html"
+    var div = document.getElementById('recipe-div')
+    var complete = document.createElement('p')
+    complete.innerHTML = 'Post submitted, please return to feed to see your post at the top of the page'
+    div.appendChild(complete)
 }
 
 function addToFirebase(name, title, background, ingredients, notes, tags) {
     addDoc(collection(db, "recipes"), {
         name,
         title,
-        background, 
-        ingredients, 
+        background,
+        ingredients,
         notes,
         tags
     });
+    //window.location.href = "https://cs.wellesley.edu/~ac119/test2/ricebook/feed.html"
 
 }
 
-export function addNewIngredient(){
+export function addNewIngredient() {
     var ingredientDropDown = document.getElementById('ingredients')
     var bigdiv = document.createElement('div')
     bigdiv.setAttribute('id', 'ingredient')
@@ -102,12 +108,12 @@ export function addNewIngredient(){
     amt.setAttribute('type', 'amount')
     amt.setAttribute('id', "amount")
     amt.setAttribute('step', '0.01')
-    amt.setAttribute('placeholder','0.00')
+    amt.setAttribute('placeholder', '0.00')
     bigdiv.appendChild(amt)
     var select = document.createElement('select')
     select.setAttribute('id', 'measurement');
-    var options = ['oz', 'cup','tsp','tbsp', 'gram', 'floz', 'n/a'];
-    options.forEach(function(optionText) {
+    var options = ['oz', 'cup', 'tsp', 'tbsp', 'gram', 'floz', 'n/a'];
+    options.forEach(function (optionText) {
         var option = document.createElement('option');
         option.text = optionText;
         option.value = optionText;
@@ -123,11 +129,11 @@ export function addNewIngredient(){
     ingredientDropDown.appendChild(bigdiv)
 }
 
-async function loadRecipes(){
+async function loadRecipes() {
     const q = query(collection(db, 'recipes'));
     const querySnapshot = await getDocs(q);
     console.log(querySnapshot)
-    querySnapshot.forEach(doc =>{
+    querySnapshot.forEach(doc => {
         var name = doc._document.data.value.mapValue.fields.name.stringValue
         var title = doc._document.data.value.mapValue.fields.title.stringValue
         var background = doc._document.data.value.mapValue.fields.background.stringValue
@@ -135,47 +141,47 @@ async function loadRecipes(){
         var tags = doc._document.data.value.mapValue.fields.tags.stringValue
         var ingredients = doc._document.data.value.mapValue.fields.ingredients.arrayValue.values
         var ingredientsArray = []
-        ingredients.forEach(item=>{
+        ingredients.forEach(item => {
             ingredientsArray.push(item.stringValue)
         })
-        console.log (name, title, background, notes)
+        console.log(name, title, background, notes)
         console.log(ingredientsArray)
         var bigDiv = document.createElement('div')
         bigDiv.setAttribute('id', 'post')
 
         var headers = document.createElement('h4')
-        headers.innerHTML= 'Name:';
+        headers.innerHTML = 'Title:';
         bigDiv.appendChild(headers)
         var info = document.createElement('p')
-        info.innerHTML = name
-        bigDiv.appendChild(info)
-
-        headers = document.createElement('h4')
-        headers.innerHTML= 'Title:';
-        bigDiv.appendChild(headers)
-        info = document.createElement('p')
         info.innerHTML = title
         bigDiv.appendChild(info)
 
         headers = document.createElement('h4')
-        headers.innerHTML= 'Background:';
+        headers.innerHTML = 'Name:';
+        bigDiv.appendChild(headers)
+        info = document.createElement('p')
+        info.innerHTML = name
+        bigDiv.appendChild(info)
+
+        headers = document.createElement('h4')
+        headers.innerHTML = 'Background:';
         bigDiv.appendChild(headers)
         info = document.createElement('p')
         info.innerHTML = background
         bigDiv.appendChild(info)
 
         headers = document.createElement('h4')
-        headers.innerHTML= 'Tags:';
+        headers.innerHTML = 'Tags:';
         bigDiv.appendChild(headers)
         info = document.createElement('p')
         info.innerHTML = tags
         bigDiv.appendChild(info)
 
         headers = document.createElement('h4')
-        headers.innerHTML= 'Ingredients:';
+        headers.innerHTML = 'Ingredients:';
         bigDiv.appendChild(headers)
         info = document.createElement('ul')
-        ingredientsArray.forEach(ingredient=>{
+        ingredientsArray.forEach(ingredient => {
             var li = document.createElement('li')
             li.innerHTML = ingredient
             info.appendChild(li)
@@ -185,4 +191,4 @@ async function loadRecipes(){
         document.getElementById('all-recipes').appendChild(bigDiv)
     })
 }
-export {loadRecipes};
+export { loadRecipes };

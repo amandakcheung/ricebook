@@ -8,7 +8,8 @@ newPostButton.addEventListener('click', newPost)}
 
 if (document.getElementById('submit-post')){
 const submitPost = document.getElementById('submit-post')
-submitPost.addEventListener('click', createPost)}
+submitPost.addEventListener('click', createPost)
+}
 //document.getElementById("submit-post").addEventListener('click', console.log('hello'))
 
 // const loginButton = document.getElementById('login-button')
